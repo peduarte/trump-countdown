@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ESNextbin Sketch</title>
+  <!-- put additional styles and scripts here -->
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
+      font-family: ;
+    }
+    
+    h1 {}
+    
+    #days {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <!-- put markup and other contents here -->
+  <h1>
+    <span id="days">1,455</span>
+    days left
+    <span id="until">until Trump's out of office</span>
+  </h1>
+  
+  <script>
+    var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+    var firstDate = new Date(2016,10,9);
+    var secondDate = new Date(2020,10,9);
+    var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
+    document.getElementById('days').innerHTML = diffDays;
+  </script>
+</body>
+</html>

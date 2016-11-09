@@ -5,22 +5,23 @@
   <title>How many days left with Trump?</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    
+
+    html, body { min-height: 100vh; }
+
     body {
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      height: 100%;
-      
+
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
       background: #cf1b41;
       color: white;
-      
+
       font-size: 5vw;
       padding: 2.5%;
     }
-    
+
     #days {
       display: block;
       font-size: 10vw;
@@ -29,24 +30,25 @@
   </style>
 </head>
 <body>
-  
-  <span id="days">0</span> days left
-  <span id="until">until Trump's out of office</span>
-  
+
+  <span id="days">0</span>
+  days left until
+  <span id="phrases">Trump's out of office</span>
+
   <script src="https://unpkg.com/countup.js@1.7.1"></script>
   <script>
     var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
     var firstDate = new Date(2016,10,9);
     var secondDate = new Date(2020,10,9);
     var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
-    
+
     var options = {
-        useEasing : true, 
-        useGrouping : true, 
-        separator : ',', 
-        decimal : '.', 
-        prefix : '', 
-        suffix : '' 
+        useEasing : true,
+        useGrouping : true,
+        separator : ',',
+        decimal : '.',
+        prefix : '',
+        suffix : ''
     };
     var countdown = new CountUp("days", 0, diffDays, 0, 2.5, options);
     countdown.start();

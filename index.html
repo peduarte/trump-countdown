@@ -30,7 +30,6 @@
         body {
             display: flex;
             justify-content: center;
-            align-items: center;
             flex-direction: column;
 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -38,44 +37,43 @@
             color: white;
             text-transform: uppercase;
 
-            font-size: 5vw;
-            padding: 2.5%;
-            font-weight: bold;
-        }
-
-        #days {
-            display: block;
-            font-size: 10vw;
+            font-size: 5.5vw;
+            padding-left: 5%;
             font-weight: bold;
         }
 
         .share {
             position: absolute;
-            bottom: 2.5%;
-            left: 0;
-            text-align: center;
-            width: 100%;
+            top: 6px;
+            right: 6px;
+            display: flex;
         }
 
         .share a {
-            text-decoration: none;
+            display: inline-block;
             font-size: initial;
+            text-decoration: none;
+            width: 50px;
+            height: 50px;
+            padding: 6px;
         }
-        
+
         .share svg {
-            width: 44px;
-            height: 44px;
+            width: 100%;
+            height: 100%;
             fill: white;
         }
-        
+
         .share a:hover svg { fill: #7ab5d6; }
     </style>
 </head>
 
 <body>
 
-    <span id="days">0</span>
-    days left with Trump.
+    <strong id="days"></strong>
+    <strong id="hours"></strong>
+    <strong id="minutes"></strong>
+    <strong id="seconds"></strong>
 
     <div class="share">
         <a href="https://www.facebook.com/sharer/sharer.php?u=http://howmanydaysleftwithtrump.com" target="_blank">
@@ -88,21 +86,44 @@
 
     <script src="https://unpkg.com/countup.js@1.7.1"></script>
     <script>
-        var oneDay = 24 * 60 * 60 * 1000;
-        var firstDate = new Date(2017,0,20);
-        var secondDate = new Date(2020,10,9);
-        var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
+        function daysBetween(startDate, endDate) {
+            var startDateInMs = startDate.getTime();
+            var endDateInMs = endDate.getTime();
+            var differenceInMs = endDateInMs - startDateInMs;
+            differenceInMs = differenceInMs / 1000;
+            var seconds = Math.floor(differenceInMs % 60);
+            differenceInMs = differenceInMs / 60;
+            var minutes = Math.floor(differenceInMs % 60);
+            differenceInMs = differenceInMs / 60;
+            var hours = Math.floor(differenceInMs % 24);
+            var days = Math.floor(differenceInMs / 24);
+            return {
+                days: days,
+                hours: hours,
+                minutes: minutes,
+                seconds: seconds
+            };
+        }
 
-        var options = {
-            useEasing: true,
-            useGrouping: true,
-            separator: ',',
-            decimal: '.',
-            prefix: '',
-            suffix: ''
-        };
-        var countdown = new CountUp("days", 0, diffDays, 0, 2.5, options);
-        countdown.start();
+        var selectors = {
+            days: document.getElementById('days'),
+            hours: document.getElementById('hours'),
+            minutes: document.getElementById('minutes'),
+            seconds: document.getElementById('seconds')
+        }
+
+
+        function updateCountdown() {
+            var start = new Date();
+            var end = new Date(2020, 10, 9);
+            var countdown = daysBetween(start, end);
+
+            for (key in countdown) {
+                selectors[key].innerHTML = countdown[key] + ' fucking ' + key;
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
 
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

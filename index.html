@@ -2,8 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>ESNextbin Sketch</title>
-  <!-- put additional styles and scripts here -->
+  <title>How many days left with Trump?</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
@@ -11,24 +10,30 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
       
-      font-family: ;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      background: #cf1b41;
+      color: white;
+      
+      font-size: 5vw;
+      padding: 5%;
     }
     
     h1 {}
     
     #days {
       display: block;
+      font-size: 10vw;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <!-- put markup and other contents here -->
-  <h1>
-    <span id="days">1,455</span>
-    days left
-    <span id="until">until Trump's out of office</span>
-  </h1>
+  
+  <span id="days">1,455</span>
+  days left
+  <span id="until">until Trump's out of office</span>
   
   <script>
     var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds

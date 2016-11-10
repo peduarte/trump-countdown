@@ -24,7 +24,7 @@
 
 
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
         html, body { min-height: 100vh; }
         ::selection { background: #444444; }
 
@@ -33,15 +33,36 @@
             justify-content: center;
             flex-direction: column;
 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
             background: #cf1b41;
+            padding-left: 5%;
+            border: 14px solid #aa1c3a;
+            font-size: 5.5vw;
+        }
+
+        .is-blue {
+            background-color: #399fd3;
+            border-color: #004b6a
+        }
+
+        body, button {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
             color: white;
             text-transform: uppercase;
 
-            font-size: 5.5vw;
             font-weight: bold;
-            padding-left: 5%;
-            border: 14px solid #aa1c3a;
+            -webkit-font-smoothing: antialiased;
+            font-smoothing: antialiased;
+        }
+
+        .lol {
+            position: absolute;
+            bottom: 20px;
+        }
+
+        button {
+            font-size: 4vmin;
+            background: none;
+            border: none;
         }
 
         .share {
@@ -71,11 +92,14 @@
 </head>
 
 <body>
-
     <strong id="days"></strong>
     <strong id="hours"></strong>
     <strong id="minutes"></strong>
     <strong id="seconds"></strong>
+
+	<div class="lol">
+		<button type="button" id="theme">I don't fucking like <span id="color">red</span></button>
+	</div>
 
     <div class="share">
         <a href="https://www.facebook.com/sharer/sharer.php?u=http://howmanydaysleftwithtrump.com" target="_blank">
@@ -106,6 +130,16 @@
             };
         }
 
+        function addClass(element, className) {
+            if (!element) { return; }
+            element.className = (element.className + ' ' + className).trim();
+        }
+
+        function removeClass(element, className) {
+            if (!element) { return; }
+            element.className = element.className.replace(className, '').trim();
+        }
+
         var selectors = {
             days: document.getElementById('days'),
             hours: document.getElementById('hours'),
@@ -115,10 +149,7 @@
 
 
         function updateCountdown() {
-            var start = new Date();
-            var end = new Date(2020, 10, 9);
-            var countdown = daysBetween(start, end);
-
+            var countdown = daysBetween(new Date(), new Date(2020, 10, 9));
             for (key in countdown) {
                 selectors[key].innerHTML = countdown[key] + ' fucking ' + key;
             }
@@ -126,6 +157,21 @@
 
         updateCountdown();
         setInterval(updateCountdown, 1000);
+
+        var themeButton = document.getElementById('theme');
+        var colorText = document.getElementById('color');
+        var currentTheme = 'red';
+        themeButton.addEventListener('click', function() {
+            if (currentTheme === 'red') {
+                addClass(document.body, 'is-blue');
+                colorText.innerHTML = 'blue';
+                currentTheme = 'blue';
+            } else {
+                removeClass(document.body, 'is-blue');
+                colorText.innerHTML = 'red';
+                currentTheme = 'red';
+            }
+        });
 
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

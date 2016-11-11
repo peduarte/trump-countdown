@@ -175,7 +175,7 @@
             shareLinks.forEach(function(shareLink) {
                 var link = document.getElementById(shareLink.id);
                 link.addEventListener('click', function() {
-                    var url = shareLink.baseUrl + shareLink.param + '=' + getText() + ' LEFT WITH TRUMP!'
+                    var url = shareLink.baseUrl + shareLink.param + '=' + getText() + 'LEFT WITH TRUMP!'
                     link.setAttribute('href', url);
                 });
             });
@@ -183,7 +183,7 @@
             function getText() {
                 var text = '';
                 for (key in countdown) {
-                    text += countdown[key] + ' fucking ' + key;
+                    text += countdown[key] + ' fucking ' + key + ' ';
                 }
                 return text.toUpperCase();
             }

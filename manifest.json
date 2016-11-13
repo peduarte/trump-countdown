@@ -1,0 +1,15 @@
+{
+  "name": "Trump Countdown",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "Display Trump Countdown when a new tab is opened",
+  "homepage_url": "http://howmanydaysleftwithtrump.com",
+  "icons": {
+    "16": "icons/16x16.png",
+    "48": "icons/48x48.png",
+    "128": "icons/128x128.png"
+  },
+  "chrome_url_overrides": {
+    "newtab": "override.html"
+  }
+}

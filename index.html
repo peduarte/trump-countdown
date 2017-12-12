@@ -212,36 +212,23 @@
             }
         }
 
-        var colorText = document.getElementById('color');
-
-        if (!localStorage.theme) {
-          localStorage.setItem('theme', 'red');
-        }
-
-        function setTheme(theme) {
-          colorText.innerHTML = theme;
-
-          if (theme === 'blue') {
-            localStorage.setItem('theme', 'blue');
-            addClass(document.body, 'is-blue')
-          } else {
-            localStorage.setItem('theme', 'red');
-            removeClass(document.body, 'is-blue')
-          }
-        }
-        setTheme(localStorage.theme);
-
         updateCountdown();
         setInterval(updateCountdown, 1000);
         setUpSocialLinks();
 
         var themeButton = document.getElementById('theme');
+        var colorText = document.getElementById('color');
+        var currentTheme = 'red';
         themeButton.addEventListener('click', function() {
-          if (localStorage.theme === 'red') {
-            setTheme('blue');
-          } else {
-            setTheme('red');
-          }
+            if (currentTheme === 'red') {
+                addClass(document.body, 'is-blue');
+                colorText.innerHTML = 'blue';
+                currentTheme = 'blue';
+            } else {
+                removeClass(document.body, 'is-blue');
+                colorText.innerHTML = 'red';
+                currentTheme = 'red';
+            }
         });
 
         function offerChromeExtension() {

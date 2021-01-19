@@ -207,7 +207,7 @@
             }
            
 
-            countdown = daysBetween(changeTimezone(new Date()), new Date(2021, 00, 20));
+            countdown = daysBetween(changeTimezone(new Date()), new Date(2021, 00, 20, 18));
             for (key in countdown) {
                 selectors[key].innerHTML = countdown[key] + ' fucking ' + key;
             }
